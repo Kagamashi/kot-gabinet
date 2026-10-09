@@ -381,7 +381,7 @@ blockquote {
   }
 
   .pasek-zabawowy,
-  .kot-kontener {
+  .kot-pozycja {
     display: none;
   }
 }
@@ -402,29 +402,39 @@ blockquote {
   color: var(--akcent);
 }
 
-/* ---------- maskotka: skaczący kot ---------- */
+/* ---------- maskotka: skaczący kot ----------
+   Domyślnie (bez JS albo gdy JS nie wystartuje) kot stoi nieruchomo w rogu ekranu —
+   zwykły CSS, bez animacji. Gdy kot.js wystartuje (i prefers-reduced-motion na to
+   pozwala), dodaje klasę „kot-ruch”, która przestawia pozycjonowanie na left/top=0,
+   a dalszy ruch (fizyka: grawitacja, odbicia od ścian/podłogi/sufitu) napędza już
+   wyłącznie Web Animations API w kot.js. */
 
-.kot-kontener {
+.kot-pozycja {
   position: fixed;
   right: 10px;
   bottom: 10px;
   width: 92px;
   pointer-events: none;
   z-index: 50;
-  transform-origin: 50% 100%;
-  animation: kot-skok 7s ease-in-out infinite;
+}
+
+.kot-pozycja.kot-ruch {
+  right: auto;
+  bottom: auto;
+  left: 0;
+  top: 0;
   will-change: transform;
 }
 
-.kot-kontener picture,
-.kot-kontener img {
+.kot-pozycja picture,
+.kot-pozycja img {
   display: block;
   width: 100%;
   height: auto;
 }
 
 @media (min-width: 40em) {
-  .kot-kontener {
+  .kot-pozycja {
     width: 150px;
     right: 20px;
     bottom: 16px;
@@ -432,50 +442,32 @@ blockquote {
 }
 
 @media (min-width: 60em) {
-  .kot-kontener {
+  .kot-pozycja {
     width: 180px;
     right: 28px;
     bottom: 20px;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .kot-kontener {
-    animation: none;
+/* Niezależne od JS „oddychanie” kota — drobny, ciągły squash & stretch na
+   wewnętrznym elemencie, żeby kot żył nawet w statycznej pozycji (bez JS). */
+.kot-cialo {
+  transform-origin: 50% 100%;
+  animation: kot-oddech 0.9s ease-in-out infinite;
+}
+
+@keyframes kot-oddech {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.93);
   }
 }
 
-@keyframes kot-skok {
-  0% {
-    transform: translateY(0) scale(1, 1) rotate(0deg);
-  }
-  3% {
-    /* przysiad przed skokiem */
-    transform: translateY(0) scale(1.18, 0.82) rotate(0deg);
-  }
-  9% {
-    /* wybicie, rozciągnięcie w locie */
-    transform: translateY(-8px) scale(0.88, 1.18) rotate(-3deg);
-  }
-  20% {
-    /* szczyt lotu */
-    transform: translateY(-50px) scale(1, 1) rotate(9deg);
-  }
-  30% {
-    /* opadanie */
-    transform: translateY(-12px) scale(0.95, 1.05) rotate(-5deg);
-  }
-  36% {
-    /* lądowanie, przysiad */
-    transform: translateY(0) scale(1.2, 0.8) rotate(0deg);
-  }
-  40% {
-    /* odbicie po lądowaniu */
-    transform: translateY(0) scale(0.97, 1.03) rotate(0deg);
-  }
-  44%,
-  100% {
-    /* spoczynek do końca cyklu */
-    transform: translateY(0) scale(1, 1) rotate(0deg);
+@media (prefers-reduced-motion: reduce) {
+  .kot-cialo {
+    animation: none;
   }
 }

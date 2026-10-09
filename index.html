@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <meta name="referrer" content="no-referrer">
@@ -201,12 +201,15 @@
   </div>
 </footer>
 
-<div class="kot-kontener" aria-hidden="true">
-  <picture>
-    <source srcset="kot.webp" type="image/webp">
-    <img src="kot.png" alt="" width="360" height="330">
-  </picture>
+<div class="kot-pozycja" aria-hidden="true">
+  <div class="kot-cialo">
+    <picture>
+      <source srcset="kot.webp" type="image/webp">
+      <img src="kot.png" alt="" width="360" height="330">
+    </picture>
+  </div>
 </div>
+<script src="kot.js" defer></script>
 
 </body>
 </html>
