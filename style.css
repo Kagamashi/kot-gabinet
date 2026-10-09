@@ -1,0 +1,481 @@
+/* Indywidualna Praktyka Stomatologiczna Mariola Krajewska — informacja o naruszeniu danych.
+   Jeden arkusz stylów, bez zewnętrznych zasobów i bez fontów z internetu. */
+
+:root {
+  --tlo: #fbf9f5;          /* złamana biel */
+  --tlo-ramka: #f2eee6;    /* ciepły odcień tła dla wyróżnionych bloków */
+  --tlo-skrot: #eef3f8;    /* chłodny, spokojny odcień akcentu */
+  --tekst: #2b2b28;        /* ciepła czerń */
+  --tekst-drugi: #55524c;  /* teksty pomocnicze */
+  --akcent: #1f4e79;       /* stonowany granatowy niebieski */
+  --akcent-ciemny: #16395a;
+  --linia: #ded8cd;
+}
+
+html {
+  background: var(--tlo);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--tlo);
+  color: var(--tekst);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    system-ui, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+@media (min-width: 40em) {
+  body { font-size: 19px; }
+}
+
+.kolumna {
+  max-width: 34rem;      /* ok. 65 znaków w wierszu */
+  margin: 0 auto;
+  padding: 0 1.125rem;
+}
+
+/* ---------- odnośnik pomijający nawigację ---------- */
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--tlo);
+  color: var(--akcent);
+  padding: 0.75rem 1rem;
+}
+
+.skip:focus {
+  left: 0;
+  z-index: 10;
+}
+
+/* ---------- nagłówek ---------- */
+
+.naglowek {
+  border-bottom: 1px solid var(--linia);
+  padding: 1.25rem 0 1rem;
+  background: var(--tlo-ramka);
+}
+
+@media (min-width: 40em) {
+  .naglowek { padding: 1.75rem 0 1.25rem; }
+}
+
+.nadawca {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--tekst-drugi);
+}
+
+.nadawca strong {
+  display: inline-block;
+  color: var(--tekst);
+  font-size: 1.0625rem;
+}
+
+h1 {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--akcent-ciemny);
+}
+
+@media (min-width: 40em) {
+  h1 { font-size: 1.75rem; }
+}
+
+.data {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--tekst-drugi);
+}
+
+/* ---------- treść ---------- */
+
+main {
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+h2 {
+  margin: 2.25rem 0 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--akcent-ciemny);
+}
+
+h3 {
+  margin: 1.5rem 0 0.5rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--tekst);
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--linia);
+  margin: 2.5rem 0;
+}
+
+ul, ol {
+  margin: 0 0 1rem;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.75rem;
+}
+
+/* ---------- „W skrócie" ---------- */
+
+.skrot {
+  background: var(--tlo-skrot);
+  border-left: 4px solid var(--akcent);
+  border-radius: 4px;
+  padding: 1rem 1.125rem 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.skrot h2 {
+  margin-top: 0.25rem;
+}
+
+/* ---------- kroki ---------- */
+
+.kroki {
+  list-style: none;
+  padding-left: 0;
+  counter-reset: krok;
+}
+
+.kroki > li {
+  counter-increment: krok;
+  position: relative;
+  padding-left: 2.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.kroki > li::before {
+  content: counter(krok);
+  position: absolute;
+  left: 0;
+  top: 0.9rem;
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--akcent);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.kroki > li > h3:first-child {
+  margin-top: 1rem;
+}
+
+/* ---------- listy (a), (b) w treści formalnej ---------- */
+
+.alfa {
+  list-style: none;
+  padding-left: 0;
+  counter-reset: alfa;
+}
+
+.alfa > li {
+  counter-increment: alfa;
+  position: relative;
+  padding-left: 2.25rem;
+}
+
+.alfa > li::before {
+  content: "(" counter(alfa, lower-alpha) ")";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--tekst-drugi);
+}
+
+/* ---------- odnośniki i przycisk ---------- */
+
+a {
+  color: var(--akcent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--akcent-ciemny);
+}
+
+a:focus-visible,
+.przycisk:focus-visible {
+  outline: 3px solid var(--akcent-ciemny);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.przycisk-wiersz {
+  margin: 1rem 0;
+}
+
+.przycisk {
+  display: inline-block;
+  background: var(--akcent);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+  border-radius: 6px;
+  line-height: 1.4;
+}
+
+.przycisk:hover {
+  background: var(--akcent-ciemny);
+  color: #fff;
+}
+
+.adres-www {
+  font-size: 0.9375rem;
+  color: var(--tekst-drugi);
+  word-break: break-word;
+}
+
+.adres-www .url {
+  color: var(--tekst);
+}
+
+/* ---------- treść formalna ---------- */
+
+.komunikat {
+  font-size: 1rem;
+}
+
+.komunikat h2 {
+  font-size: 1.1875rem;
+}
+
+.komunikat a {
+  word-break: break-word;
+}
+
+blockquote {
+  margin: 1.25rem 0;
+  padding: 0.875rem 1rem 0.125rem;
+  background: var(--tlo-ramka);
+  border-left: 4px solid var(--linia);
+  border-radius: 4px;
+}
+
+/* ---------- kontakt ---------- */
+
+.kontakt .uwaga {
+  margin-top: 1.5rem;
+  padding: 0.875rem 1rem;
+  background: var(--tlo-ramka);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* ---------- stopka ---------- */
+
+.stopka {
+  border-top: 1px solid var(--linia);
+  background: var(--tlo-ramka);
+  padding: 1.5rem 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--tekst-drugi);
+}
+
+.stopka p {
+  margin: 0 0 0.4rem;
+}
+
+.stopka p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- wydruk ---------- */
+
+@media print {
+  html, body {
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+
+  .kolumna {
+    max-width: none;
+    padding: 0;
+  }
+
+  .skip,
+  .przycisk-wiersz {
+    display: none;
+  }
+
+  .naglowek,
+  .stopka,
+  .skrot,
+  blockquote,
+  .kontakt .uwaga {
+    background: #fff;
+    color: #000;
+  }
+
+  .naglowek {
+    padding-top: 0;
+  }
+
+  .skrot,
+  blockquote,
+  .kontakt .uwaga {
+    border: 1px solid #000;
+    border-left-width: 1px;
+    padding: 0.5rem 0.75rem;
+  }
+
+  h1, h2, h3,
+  .nadawca, .data, .adres-www, .stopka {
+    color: #000;
+  }
+
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  .kroki > li::before {
+    background: #fff;
+    color: #000;
+    border: 1px solid #000;
+    line-height: 1.9rem;
+  }
+
+  h2, h3 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  li, blockquote, p {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  main {
+    padding-bottom: 0;
+  }
+
+  .pasek-zabawowy,
+  .kot-kontener {
+    display: none;
+  }
+}
+
+/* ---------- pasek „wersja rozrywkowa" ---------- */
+
+.pasek-zabawowy {
+  margin: 0;
+  padding: 0.5rem 1rem;
+  background: var(--tlo-ramka);
+  border-bottom: 1px solid var(--linia);
+  color: var(--tekst-drugi);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.pasek-zabawowy a {
+  color: var(--akcent);
+}
+
+/* ---------- maskotka: skaczący kot ---------- */
+
+.kot-kontener {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  width: 92px;
+  pointer-events: none;
+  z-index: 50;
+  transform-origin: 50% 100%;
+  animation: kot-skok 7s ease-in-out infinite;
+  will-change: transform;
+}
+
+.kot-kontener picture,
+.kot-kontener img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 40em) {
+  .kot-kontener {
+    width: 150px;
+    right: 20px;
+    bottom: 16px;
+  }
+}
+
+@media (min-width: 60em) {
+  .kot-kontener {
+    width: 180px;
+    right: 28px;
+    bottom: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kot-kontener {
+    animation: none;
+  }
+}
+
+@keyframes kot-skok {
+  0% {
+    transform: translateY(0) scale(1, 1) rotate(0deg);
+  }
+  3% {
+    /* przysiad przed skokiem */
+    transform: translateY(0) scale(1.18, 0.82) rotate(0deg);
+  }
+  9% {
+    /* wybicie, rozciągnięcie w locie */
+    transform: translateY(-8px) scale(0.88, 1.18) rotate(-3deg);
+  }
+  20% {
+    /* szczyt lotu */
+    transform: translateY(-50px) scale(1, 1) rotate(9deg);
+  }
+  30% {
+    /* opadanie */
+    transform: translateY(-12px) scale(0.95, 1.05) rotate(-5deg);
+  }
+  36% {
+    /* lądowanie, przysiad */
+    transform: translateY(0) scale(1.2, 0.8) rotate(0deg);
+  }
+  40% {
+    /* odbicie po lądowaniu */
+    transform: translateY(0) scale(0.97, 1.03) rotate(0deg);
+  }
+  44%,
+  100% {
+    /* spoczynek do końca cyklu */
+    transform: translateY(0) scale(1, 1) rotate(0deg);
+  }
+}
